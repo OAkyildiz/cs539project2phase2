@@ -1,15 +1,23 @@
  function EVAL = Evaluate(ACTUAL,PREDICTED,labels)
 % Evaluate This fucntion evaluates the performance of a classification model by 
-% calculating :Accuracy, Sensitivity, Specificity, Precision, Recall, F-Measure, G-mean.
-%
-%   The function assumes there are no unclassified instances.
-%   Output is tabel ready (cells) 
-%    Input: ACTUAL = Column matrix with actual class labels of the training
+% calculating :Accuracy, Sensitivity, 
+% Specificity, Precision, Recall, F-Measure, G-mean.
+% Input: ACTUAL = Column matrix with actual class labels of the training
 %                 examples
 %        PREDICTED = Column matrix with predicted class labels by the
 %                    classification model
 % Output: EVAL = Row matrix with all the performance measures
 % modified by oakyildiz.
+
+
+accuracy = (tp+tn)/N;
+%sensitivity = tp_rate;
+%specificity = tn_rate;
+precision = tp/(tp+fp);
+recall = tp_rate;
+%f_measure = 2*((precision*recall)/(precision + recall));
+%gmean = sqrt(tp_rate*tn_rate);
+
 
 
 C = length(labels);
@@ -27,8 +35,8 @@ gmean = zeros(C,1);
 for c=1:C
     p = sum(PREDICTED==c); %positives
     n = N-p;            %negatives (relative)
-    tp =  sum(ACTUAL==PREDICTED); %True positives
-    tn = sum(ACTUAL~=PREDICTED);  %True negatives
+    tp =  sum(ACTUAL==PPREDICTED); %True positives
+    tn = sum(ACTUAL~=PPREDICTED);  %True negatives
     fp = n-tn;  %false positives
     %fn = p-tp;  %false negatives
 
