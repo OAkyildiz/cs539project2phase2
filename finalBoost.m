@@ -24,14 +24,14 @@ sum(pokerAdaBoost.tree.predict==pokerTest.Labels)
 %% Adaboost Wine 
 disp('Adaboost Wine ')
 wineAdaBoost.tree.mdl = fitensemble(wineTrain.Data, ...
-    wineTrain.Labels,'AdaBoostM2', 30, boostTree);
+    wineTrain.Labels,'AdaBoostM2', 10, boostTree);
 wineAdaBoost.tree.predict=predict(wineAdaBoost.tree.mdl,wineTest.Data);
 sum(wineAdaBoost.tree.predict==wineTest.Labels)
 
 %% Adaboost Noisy Wine
 disp('Adaboost Noisy Wine')
 wineAdaBoost.treeNoisy.mdl = fitensemble(wineTrain.Data, ...
-    wineTrain.NoisyLabels,'AdaBoostM2', 30, boostTree);
+    wineTrain.NoisyLabels,'AdaBoostM2', 10, boostTree);
 wineAdaBoost.treeNoisy.predict=predict(wineAdaBoost.treeNoisy.mdl,wineTest.Data);
 sum(wineAdaBoost.treeNoisy.predict==wineTest.Labels)
 

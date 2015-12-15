@@ -42,7 +42,7 @@ wineTest.Data=wine(windex.test(),2:end);
 wineTest.Labels=wine(windex.test(),1);
 %% Classification noise
 T = length(wineTrain.Data);
-LabelNoise = round(normrnd(0, 0.32, T,1));
+LabelNoise = round(normrnd(0, 0.5, T,1));
 wineTrain.NoisyLabels = wineTrain.Labels + LabelNoise;
 wineTrain.er_rat = sum(wineTrain.NoisyLabels ~= wineTrain.Labels)/T;
 %% Page_block Data set
