@@ -49,12 +49,12 @@ wineTrain.er_rat = sum(wineTrain.NoisyLabels ~= wineTrain.Labels)/T;
 
 load page-blocks.data
 %% stratify
-pagedex =cvpartition(wine(:,1),'Holdout',0.25);
-pageTrain.Data=wine(pagedex.training(),1:end-1);
-pageTrain.Labels=wine(pagedex.training(),end);
+pagedex =cvpartition(page_blocks(:,1),'Holdout',0.25);
+pageTrain.Data=page_blocks(pagedex.training(),1:end-1);
+pageTrain.Labels=page_blocks(pagedex.training(),end);
 
-pageTest.Data=wine(pagedex.test(),1:end-1);
-pageTest.Labels=wine(pagedex.test(),end);
+pageTest.Data=page_blocks(pagedex.test(),1:end-1);
+pageTest.Labels=page_blocks(pagedex.test(),end);
 %% Classification noise
 T = length(pageTrain.Data);
 LabelNoise = round(normrnd(0, 0.32, T,1));
