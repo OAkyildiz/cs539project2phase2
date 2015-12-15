@@ -55,3 +55,10 @@ pageTotalBoost.tree1.mdl = fitensemble(pageTrain.Data, ...
     pageTrain.Labels,'TotalBoost', 1, boostTree);
 pageTotalBoost.tree1.predict=predict(pageTotalBoost.tree1.mdl,pageTest.Data);
 sum(pageTotalBoost.tree1.predict==pageTest.Labels)
+
+%% Adaboost TreeNoisy 20 - page_blocks
+disp(' Adaboost Tree 20 - page_block')
+pageAdaBoost.treeNoisy.mdl = fitensemble(pageTrain.Data, ...
+    pageTrain.NoisyLabels,'AdaBoostM2', 20, boostTree);
+pageAdaBoost.treeNoisy.predict=predict(pageAdaBoost.treeNoisy.mdl,pageTest.Data);
+sum(pageAdaBoost.treeNoisy.predict==pageTest.Labels)
