@@ -8,64 +8,57 @@ pageAdaBoost.tree.mdl = fitensemble(pageTrain.Data, ...
 pageAdaBoost.tree.predict=predict(pageAdaBoost.tree.mdl,pageTest.Data);
 sum(pageAdaBoost.tree.predict==pageTest.Labels)
 
-
+%% Adaboost Tree 1 - page_blocks
+disp(' Adaboost Tree 1 - page_block')
+pageAdaBoost.tree1.mdl = fitensemble(pageTrain.Data, ...
+    pageTrain.Labels,'AdaBoostM2', 1, boostTree);
+pageAdaBoost.tree1.predict=predict(pageAdaBoost.tree1.mdl,pageTest.Data);
+sum(pageAdaBoost.tree1.predict==pageTest.Labels)
 %% Adaboost Tree 20 - poker
 disp('Adaboost Tree 20 - poker')
 pokerAdaBoost.tree.mdl = fitensemble(pokerTrain.Data, ...
-    pokerTrain.Labels,'AdaBoostM2', 20, boostTree);
+    pokerTrain.Labels,'AdaBoostM2', 30, boostTree);
 pokerAdaBoost.tree.predict=predict(pokerAdaBoost.tree.mdl,pokerTest.Data);
 sum(pokerAdaBoost.tree.predict==pokerTest.Labels)
 
 %% Adaboost Wine 
 disp('Adaboost Wine ')
 wineAdaBoost.tree.mdl = fitensemble(wineTrain.Data, ...
-    wineTrain.Labels,'AdaBoostM2', 20, boostTree);
+    wineTrain.Labels,'AdaBoostM2', 10, boostTree);
 wineAdaBoost.tree.predict=predict(wineAdaBoost.tree.mdl,wineTest.Data);
 sum(wineAdaBoost.tree.predict==wineTest.Labels)
 
 %% Adaboost Noisy Wine
 disp('Adaboost Noisy Wine')
 wineAdaBoost.treeNoisy.mdl = fitensemble(wineTrain.Data, ...
-    wineTrain.NoisyLabels,'AdaBoostM2', 20, boostTree);
+    wineTrain.NoisyLabels,'AdaBoostM2', 10, boostTree);
 wineAdaBoost.treeNoisy.predict=predict(wineAdaBoost.treeNoisy.mdl,wineTest.Data);
 sum(wineAdaBoost.treeNoisy.predict==wineTest.Labels)
 
 %% RUSBoost 20 - poker
 disp('RUSBoost 20 - poker')
-pokerAdaBoost.tree.mdl = fitensemble(pokerTrain.Data, ...
-    pokerTrain.Labels,'RUSBoost', 20, boostTree);
-pokerAdaBoost.tree.predict=predict(pokerAdaBoost.tree.mdl,pokerTest.Data);
-sum(pokerAdaBoost.tree.predict==pokerTest.Labels)
+pokerRUSBoost.tree.mdl = fitensemble(pokerTrain.Data, ...
+    pokerTrain.Labels,'RUSBoost', 30, boostTree);
+pokerRUSBoost.tree.predict=predict(pokerRUSBoost.tree.mdl,pokerTest.Data);
+sum(pokerRUSBoost.tree.predict==pokerTest.Labels)
 
-%% TotalBoost - page block
-disp('TotalBoost - page block')
-%%
+%% TotalBoost Tree 20 - page_blocks
+disp(' TotalBoost Tree 20 - page_block')
+pageTotalBoost.tree.mdl = fitensemble(pageTrain.Data, ...
+    pageTrain.Labels,'TotalBoost', 30, boostTree);
+pageTotalBoost.tree.predict=predict(pageTotalBoost.tree.mdl,pageTest.Data);
+sum(pageTotalBoost.tree.predict==pageTest.Labels)
 
-    %  b. Ada Tree 2
-pokerAdaBoost.tree50.mdl = fitensemble(pokerTrain.Data,pokerTrain.Labels, ...
-  'AdaBoostM2', 200, 'Tree');
-%%
+%% Totalboost Tree 1 - page_blocks
+disp(' TotalBoost Tree 1 - page_block')
+pageTotalBoost.tree1.mdl = fitensemble(pageTrain.Data, ...
+    pageTrain.Labels,'TotalBoost', 1, boostTree);
+pageTotalBoost.tree1.predict=predict(pageTotalBoost.tree1.mdl,pageTest.Data);
+sum(pageTotalBoost.tree1.predict==pageTest.Labels)
 
-pokerAdaBoost.tree50.predict=predict(pokerAdaBoost.tree50.mdl,pokerTest.Data);
-%%
-sum(pokerAdaBoost.tree50.predict==pokerTest.Labels)
-%%%%%
-%%
-    % c. Ada Discriminant
-pokerAdaBoost.discr.mdl = fitensemble(pokerTrain.Data,pokerTrain.Labels, ...
-  'AdaBoostM2', 20, 'Discriminant');
-%%
-
-pokerAdaBoost.discr.predict=predict(pokerAdaBoost.discr.mdl,pokerTest.Data);
-%%
-sum(pokerAdaBoost.discr.predict==pokerTest.Labels)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-
-tree.mdl = fitensemble(train, trainLab, ...
-  'AdaBoostM2', 20, boostTree);
-%%
-
-tree.predict=predict(tree.mdl,test);
-git %%
-sum(tree.predict==testLab)
+%% Adaboost TreeNoisy 20 - page_blocks
+disp(' Adaboost Tree 20 - page_block')
+pageAdaBoost.treeNoisy.mdl = fitensemble(pageTrain.Data, ...
+    pageTrain.NoisyLabels,'AdaBoostM2', 20, boostTree);
+pageAdaBoost.treeNoisy.predict=predict(pageAdaBoost.treeNoisy.mdl,pageTest.Data);
+sum(pageAdaBoost.treeNoisy.predict==pageTest.Labels)
