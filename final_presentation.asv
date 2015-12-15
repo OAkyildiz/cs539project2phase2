@@ -22,12 +22,20 @@ pokerTest.Labels = poker_hand_testing(:,end);
 
 pokerTrain.Data = poker_hand_training_true(:,1:end-1);
 pokerTrain.Labels = poker_hand_training_true(:,end);
+%% Creating claffication noise to test
+% http://www.phillong.info/publications/LS10_potential.pdf
+T = length(pokerTrain.Data);
+LabelNoise = round(normrnd(0, 0.32, T,1));
+pokerTrain.NoisyLabels = pokerTrain.Labels + LabelNoise;
+%error ratio
+er_rat=sum(pokerTrain.NoisyLabels ~= pokerTrain.Labels)/T
+disp(er_rat>0.1)
 %% Bagging
 pokerBag.mdlTree = fitensemble(pokerTrain.Data,pokerTrain.Labels, ...
   'Bag', 20, 'Tree',  'Type', 'classification');
 %%
 %[~, score]=oobPredict(poker.bag)
-pokerBag.predict=predict(pokerBag.mdl,pokerTest.Data);
+pokerBag.predict=predict(pokerBag.mdlTree,pokerTest.Data);
 %%
 sum(pokerBag.predict==pokerTest.Labels)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
